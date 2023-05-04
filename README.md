@@ -10,6 +10,6 @@ Le fichier Robots.nlogo contient le code correspondant
 3. cliquez sur "Run in your Browser" puis en haut à droite "parcourir"
 4. chargez le fichier sauvegardé (robots.nlogo) 
 
-![gif animé][robot.gif]
+![gif animé][https://github.com/cristal-smac/pls/blob/main/robot.gif]
 
 # RotorRouter
