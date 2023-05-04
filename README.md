@@ -1,4 +1,4 @@
-Cette page fournit quelques codes utilisés dans divers articles de la revue (Pour La Science)[https://www.pourlascience.fr/]
+Cette page fournit quelques codes utilisés dans divers articles de la revue [Pour La Science](https://www.pourlascience.fr/)
 
 # Les robots et l'infini (PLS n xxx)
 
