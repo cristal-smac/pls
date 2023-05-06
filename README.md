@@ -10,5 +10,6 @@ Le fichier Robots.nlogo contient le code correspondant écrit en [Netlogo](https
 3. cliquez sur "Run in your Browser" puis en haut à droite "parcourir"
 4. chargez le fichier sauvegardé (robots.nlogo) 
 
+![robot-algo2](https://user-images.githubusercontent.com/20242612/236641530-d0d7ca14-56e3-4c5f-9920-1534e9f91509.gif)
 ![robot](https://user-images.githubusercontent.com/20242612/236179384-6dec8066-bf5b-41ac-a7cd-330c1e51ad44.gif)
 ![robot-algo5](https://user-images.githubusercontent.com/20242612/236641509-dec4bbdb-ac0d-43be-85cb-12806c698462.gif)
