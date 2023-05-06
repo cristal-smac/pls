@@ -1,5 +1,3 @@
-Cette page fournit quelques codes utilisés dans divers articles 
-
 # Les robots et l'infini 
 
 Code correspondant à l'article *Les robots et l'infini* de la revue [Pour La Science](https://www.pourlascience.fr/) (PLS 551 - aout 2023) 
