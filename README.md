@@ -1,6 +1,8 @@
-Cette page fournit quelques codes utilisés dans divers articles de la revue [Pour La Science](https://www.pourlascience.fr/)
+Cette page fournit quelques codes utilisés dans divers articles 
 
-# Les robots et l'infini (PLS 551 - aout 2023)
+# Les robots et l'infini 
+
+Code correspondant à l'article *Les robots et l'infini* de la revue [Pour La Science](https://www.pourlascience.fr/) (PLS 551 - aout 2023) 
 
 Comment faire en sorte qu'un robot, doté de capacités très limitées (pas de mémoire, mais avec la possibilité de tester et marquer les cases par où il est passé) soit capable de parcourir toute une surface ?
 
