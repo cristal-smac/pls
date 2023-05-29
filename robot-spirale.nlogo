@@ -9,7 +9,7 @@ turtles-own[a b c] ; pour algo2
 
 
 
-; allumer interactivement les patchs
+; positionner interactivement les marques pour algo 4
 to patch-draw
   if mouse-down?
     [
@@ -23,20 +23,23 @@ to patch-draw
     ]
 end
 
-
-; initialisation de l'environnement
-to setup
-  ca
-  if algo = "algo2" [init2]
-  if algo = "algo4" [init4]
-  if algo = "algo5" [init5]
-
+; mettre des marques aléatoires pour algo 4
+to random-marks
   ask patches with [abs pxcor < area and abs pycor < area]
   [
       ifelse (random 100 < density)
            [set pcolor white]
            [set pcolor black]
   ]
+end
+
+; initialisation de l'environnement
+to setup
+  ca
+  if algo = "algo2" [init2]
+  if algo = "algo4" [random-marks init4]
+  if algo = "algo5" [init5]
+
   reset-ticks
   set rule ""
   tick
@@ -50,7 +53,7 @@ to go
       if algo = "algo2" [runOnce2]
       if algo = "algo4" [runOnce4]
       if algo = "algo5" [runOnce5]
-      export-view (word "robot" date-and-time ".png")
+      ; export-view (word "img/robot" date-and-time ".png")
   ]
   tick
 end
@@ -255,7 +258,7 @@ density
 density
 0
 100
-0.0
+40.0
 5
 1
 NIL
@@ -283,7 +286,7 @@ PLOT
 519
 271
 669
-marks
+visited
 NIL
 NIL
 0.0
@@ -332,7 +335,7 @@ CHOOSER
 algo
 algo
 "algo2" "algo4" "algo5"
-0
+1
 
 @#$#@#$#@
 ## WHAT IS IT?
