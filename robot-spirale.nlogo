@@ -10,13 +10,13 @@ turtles-own[a b c] ; pour algo2
 
 
 ; positionner interactivement les marques pour algo 4
-to patch-draw
+to draw-marks
   if mouse-down?
     [
       ask patch mouse-xcor mouse-ycor
-      [   ifelse pcolor = white
-          [ set pcolor black ]
-          [ set pcolor white]
+      [   ifelse plabel = "X"
+          [ set plabel "" ]
+          [ set plabel "X"]
           display
           wait 0.5
       ]
@@ -28,14 +28,15 @@ to random-marks
   ask patches with [abs pxcor < area and abs pycor < area]
   [
       ifelse (random 100 < density)
-           [set pcolor white]
-           [set pcolor black]
+           [set plabel "X"]
+           [set plabel ""]
   ]
 end
 
 ; initialisation de l'environnement
 to setup
   ca
+  ask patches [set plabel-color orange]
   if algo = "algo2" [init2]
   if algo = "algo4" [random-marks init4]
   if algo = "algo5" [init5]
@@ -66,11 +67,13 @@ to init4
     crt 1 [set color green set  heading 0 ]
 end
 
+
 to runOnce4
- let l  neighbors4 with [ pcolor = white ]
+ let l  neighbors4 with [ plabel = "X" ]
  let n count l
 
  ; on marque la case de départ
+ set plabel "X"
  set pcolor white
 
  if n = 0 [set rule "regle 0" fd 1]
@@ -87,7 +90,7 @@ to runOnce4
 
   if n = 3
   [ set rule "regle 3"
-    let l3 neighbors4 with [pcolor != white]
+    let l3 neighbors4 with [plabel != "X"]
     let p3 item 0 [self] of l3
     facexy [pxcor] of p3 [pycor] of p3
     fd 1
@@ -98,7 +101,7 @@ to runOnce4
     let p4 item 0 [self] of l
     facexy [pxcor] of p4 [pycor] of p4
     lt 90
-    if [pcolor] of patch-ahead 1 = white
+    if [plabel] of patch-ahead 1 = "X"
     [   lt 90 ]
     fd 1
   ]
@@ -176,13 +179,13 @@ end
 GRAPHICS-WINDOW
 285
 11
-623
-350
+788
+515
 -1
 -1
-10.0
+15.0
 1
-10
+13
 1
 1
 1
@@ -316,7 +319,7 @@ BUTTON
 208
 307
 interactive drawing
-patch-draw
+draw-marks
 T
 1
 T
