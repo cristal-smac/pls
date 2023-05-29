@@ -5,7 +5,7 @@ Code correspondant à l'article *Les robots et l'infini* de la revue [Pour La Sc
 Comment faire en sorte qu'un robot, doté de capacités très limitées (pas de mémoire, mais avec la possibilité de tester et marquer les cases par où il est passé) soit capable de parcourir toute une surface ?
 
 Le fichier robot-spirale.nlogo contient le code correspondant écrit en [Netlogo](https://ccl.northwestern.edu/netlogo/)
-1. téléchargez le fichier (code / "download ZIP")
+1. téléchargez le fichier (bouton Code (vert) puis "download ZIP")
 2. allez sur https://netlogoweb.org/
 3. cliquez sur "Run in your Browser" puis en haut à droite "parcourir"
 4. chargez le fichier sauvegardé (robot-spirale.nlogo) 
