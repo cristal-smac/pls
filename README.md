@@ -19,6 +19,6 @@ Le fichier robot-spirale.nlogo contient le code correspondant écrit en [Netlogo
 Dasn ces quatre figures, les cases noires sont inconnues, les cases blanches sont les cases parcourues par le robot et les X rouges sont les marques utilisées par le robot. Seul l'algorithme 4 utilise une marque.
 
 - fig1 : algo 2  : L'agent compte ses pas dans chaque direction et incrémente à chaque tour. C'est la technique "classique". Cela necessite une position angulaire (4 valeurs) et 3 entiers (infinité de valeurs), ce qui ne fonctionne pas à l'infini, contrairement aux trois suivants.
-- fig2 : algo 4  : L'agent pose des marques et tourne autour de ses marques. Il ne compte rien. Cela necessite une position angulaire (4 valeurs) et savoir tester/placer une marque
+- fig2 : algo 4  : L'agent pose des marques et tourne autour de ses marques. Il ne compte rien. Cela necessite une position angulaire (4 valeurs) et savoir tester/placer une marque. Dans cette image, des marques on déjà été posées afin de "troubler" le robot.
 - fig3 : algo 5  : L'agent pousse des balises qui lui servent de butée. Quand il en rencontre une, il la pousse et change de direction. Il ne compte rien. Cela necessite une position angulaire (4 valeurs) et 4 panneaux 
 - fig4 : algo 6  : L'agent change de direction à chaque rencontre d'un des deux agents qui voyage en diagonale. Cela necessite un synchronisation parfaite des agents. Aucun d'entre eux ne compte quoi que ce soit. Cela necessite 3 agents, chacun avec une position angulaire et détecter un autre agent
