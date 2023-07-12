@@ -5,8 +5,20 @@
 ; pour indiquer la rule dans l'interface
 globals [rule]
 
-turtles-own[a b c] ; pour algo2
+; on distingue les deux car dans algo5, les balises sont passives, tandis que dans algo7 les 3 ont un comportement autonome,
+breed [robots robot]
+breed [balises balise]
 
+robots-own[a b c ; pour algo2
+            sens dir grandir cotes]  ; pour algo 7
+; sens : 0 ou 1       le sens sur la diagonale : on descend ou on monte   (turtle 1 et 2)
+; dir  : H ou V       la marche en escaliers selon Von Neumann            (turtle 1 et 2)
+; grandir : 0 1,2,3   l'agrandissement de la spirale en 3 étapes          (turtle 0 et turtle 1)
+; cotes : 1 à 4       les 4 cotés, pour savoir quand on a terminé le tour (turtle 0)
+
+
+;=======================================
+; GESTION DE L'ENVIRONNEMENT
 
 
 ; positionner interactivement les marques pour algo 4
@@ -40,6 +52,7 @@ to setup
   if algo = "algo2" [init2]
   if algo = "algo4" [random-marks init4]
   if algo = "algo5" [init5]
+  if algo = "algo7" [init7]
 
   reset-ticks
   set rule ""
@@ -49,22 +62,57 @@ end
 
 
 to go
-  ask turtle 0
-  [
-      if algo = "algo2" [runOnce2]
-      if algo = "algo4" [runOnce4]
-      if algo = "algo5" [runOnce5]
-      ; export-view (word "img/robot" date-and-time ".png")
-  ]
+  if algo = "algo2" [ask robots [runOnce2]]
+  if algo = "algo4" [ask robots [runOnce4]]
+  if algo = "algo5" [ask robots [runOnce5]]
+  if algo = "algo7" [ask robots [moveall] ask robots [changeall]] ; needed for simultaneity
+   ; export-view (word "img/robot" date-and-time ".png")
   tick
 end
 
 
+
+;=======================================
+; ALGO 2
+; l'approche classique : 3 entiers que l'on incrémente, donc nombre de bits infini
+
+to init2
+  create-robots 1 [set color green set  heading 0 ]
+  ask robots [set a 1 set b 0 set c 1]
+end
+
+to runOnce2
+  ifelse b < a
+  [ set rule "regle 1"
+    set pcolor white
+    fd 1
+    set b (b + 1)
+  ]
+  ; else b = a
+  [
+    ifelse c = 1
+    [ set rule "regle 2"
+      rt 90
+      set b 0
+      set c 2
+    ]
+    ; else c = 2
+    [ set rule "regle 3"
+      rt 90
+      set a (a + 1)
+      set b 0
+      set c 1
+    ]
+  ]
+
+end
+
 ;=======================================
 ; ALGO 4
+; Aucun attribut : le robot regarde juste les marques autour de lui
 
 to init4
-    crt 1 [set color green set  heading 0 ]
+    create-robots 1 [set color green set  heading 0 ]
 end
 
 
@@ -108,52 +156,20 @@ to runOnce4
 end
 
 
-;=======================================
-; ALGO 2
-
-to init2
-  crt 1 [set color green set  heading 0 ]
-  ask turtles [set a 1 set b 0 set c 1]
-end
-
-to runOnce2
-  ifelse b < a
-  [ set rule "regle 1"
-    set pcolor white
-    fd 1
-    set b (b + 1)
-  ]
-  ; else b = a
-  [
-    ifelse c = 1
-    [ set rule "regle 2"
-      rt 90
-      set b 0
-      set c 2
-    ]
-    ; else c = 2
-    [ set rule "regle 3"
-      rt 90
-      set a (a + 1)
-      set b 0
-      set c 1
-    ]
-  ]
-
-end
-
 
 ;=======================================
 ; ALGO 5
+; Un robot qui "pousse" les extréminés : aucun attribut, mais 4 balises à "pousser"
 
 to init5
-  crt 5
-  ask turtle 0 [set plabel "RP" set color green set  heading 0]  ; placé sur no
-  ask turtles with [who > 0] [set shape "pentagon" set color red set heading 0]
-  ask turtle 1 [set label "no" ] ; move-to patch-at-heading-and-distance 0 1 ]
-  ask turtle 2 [set label "ne" move-to patch-at-heading-and-distance 90 1 ]
-  ask turtle 3 [set label "se" move-to patch-at-heading-and-distance 135 1 ]
-  ask turtle 4 [set label "so" move-to patch-at-heading-and-distance 180 1]
+  create-robots 1
+  ask robot 0 [set plabel "RP" set color green set  heading 0]  ; placé sur no
+  create-balises 4
+  ask balises with [who > 0] [set shape "pentagon" set color red set heading 0]
+  ask balise 1 [set label "no" ] ; move-to patch-at-heading-and-distance 0 1 ]
+  ask balise 2 [set label "ne" move-to patch-at-heading-and-distance 90 1 ]
+  ask balise 3 [set label "se" move-to patch-at-heading-and-distance 135 1 ]
+  ask balise 4 [set label "so" move-to patch-at-heading-and-distance 180 1]
 end
 
 
@@ -161,7 +177,7 @@ to runOnce5
   let l turtles-here
   ifelse count l > 1
   [
-    show "y'en a 2"
+    show "il y en a 2"
     let t item 0 [self] of other l
     show [label] of t
     if [label] of t = "no" [rt 90  ask turtle 1 [move-to patch-at-heading-and-distance 315 1]]
@@ -174,6 +190,164 @@ to runOnce5
     set pcolor white
     fd 1
   ]
+end
+
+
+
+
+;=======================================
+; ALGO 7
+; 3 robots, avec 4 attributs d'au maximum 2 bits.
+
+to init7
+  create-robots 3
+  ask robot 0 [set color red set heading 90 set size 1.1 set grandir 0 set cotes 0]
+  ask robot 1 [set color green set shape "pentagon" set size 0.6 set sens 0 set dir "V"]
+  ask robot 2 [set color green set shape "pentagon" set size 0.6 set sens 1 set dir "H"  move-to patch-at-heading-and-distance 135 1 ]
+end
+
+
+; gestion de la simultanéïté
+; IMPORTANT : tout le monde bouge, puis seulement tout le monde décide s'il tourne ou pas
+
+to moveall
+    if who = 0 [move0]
+    if who = 1 [move1]
+    if who = 2 [move2]
+end
+
+to changeall
+    if who = 0 [changedir0]
+    if who = 1 [changedir1]
+    if who = 2 [changedir2]
+end
+
+
+;-------------------
+
+; Le robot qui tourne en spirale
+to move0
+  if grandir = 0
+  [
+    set pcolor white
+    fd 1
+  ]
+  if grandir = 1 ; un pas plus loin avant de tourner
+  [ set pcolor white
+    fd 1 rt 90 set grandir grandir - 1 ]
+end
+
+to changedir0
+  if patch-here = [patch-here] of turtle 1
+  [ ifelse cotes = 3
+    [ ;beep
+      ; on déclenche l'agrandissement
+      set grandir 1
+    ]
+    ; sinon
+    [
+      rt 90
+    ]
+
+    set cotes (cotes + 1) mod 4
+    ;set label cotes
+  ]
+
+  if patch-here = [patch-here] of turtle 2
+  [
+    rt 90
+    set cotes (cotes + 1) mod 4
+    ; set label cotes
+  ]
+end
+
+
+; Le robot qui réalise la diagonale descendante de la droite vers la gauche
+; sens = 0 il descend, sens = 1 il remonte
+to move1
+  if grandir > 0 [set grandir grandir - 1 stop]
+
+  ; set plabel "x"
+
+  ifelse sens = 0 ; on descend
+  [
+    ifelse dir = "H"
+    [  move-to patch-at-heading-and-distance 90 1
+       set dir "V"
+    ]
+    ; dir = "H"
+    [
+      move-to patch-at-heading-and-distance 180 1
+      set dir "H"
+    ]
+  ]
+  ; if sens = 1 ; on monte
+  [
+    ifelse dir = "H"
+    [  move-to patch-at-heading-and-distance 270 1
+       set dir "V"
+    ]
+    ; if dir = "V"
+    [
+      move-to patch-at-heading-and-distance 0 1
+      set dir "H"
+    ]
+  ]
+end
+
+to changedir1
+    if patch-here = [patch-here] of turtle 0
+    [ ifelse sens = 0
+      [set sens 1]
+      [set sens 0]
+
+      if [cotes] of turtle 0 = 0  or [cotes] of turtle 0 = 3 ; rencontre au coin gauche
+      [ ; beep
+        ; on déclenche l'agrandissement
+        set grandir 2
+      ]
+    ]
+end
+
+
+; Le robot qui réalise la diagonale descendante de la gauche vers la droite
+; sens = 0 il descend, sens = 1 il remonte
+to move2
+
+  ;set plabel "x"
+
+  ifelse sens = 0 ; on descend
+  [
+    ifelse dir = "H"
+    [  move-to patch-at-heading-and-distance 270 1
+       set dir "V"
+    ]
+    ; dir = "H"
+    [
+      move-to patch-at-heading-and-distance 180 1
+      set dir "H"
+    ]
+  ]
+  ; if sens = 1 ; on monte
+  [
+    ifelse dir = "H"
+    [  move-to patch-at-heading-and-distance 90 1
+       set dir "V"
+    ]
+    ; if dir = "V"
+    [
+      move-to patch-at-heading-and-distance 0 1
+      set dir "H"
+    ]
+  ]
+end
+
+to changedir2
+    if patch-here = [patch-here] of turtle 0
+    [ ifelse sens = 0
+      [set sens 1]
+      [set sens 0]
+    ]
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
@@ -337,7 +511,17 @@ CHOOSER
 61
 algo
 algo
-"algo2" "algo4" "algo5"
+"algo2" "algo4" "algo5" "algo7"
+1
+
+TEXTBOX
+58
+69
+271
+107
+choose the algorith\nthen  click \"setup\" then \"forever\"
+11
+0.0
 1
 
 @#$#@#$#@
