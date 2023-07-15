@@ -159,11 +159,11 @@ end
 
 ;=======================================
 ; ALGO 5
-; Un robot qui "pousse" les extréminés : aucun attribut, mais 4 balises à "pousser"
+; Un robot qui "pousse" les extrémités : aucun attribut, mais 4 balises à "pousser"
 
 to init5
   create-robots 1
-  ask robot 0 [set plabel "RP" set color green set  heading 0]  ; placé sur no
+  ask robot 0 [set color green set  heading 0]  ; placé sur no
   create-balises 4
   ask balises with [who > 0] [set shape "pentagon" set color red set heading 0]
   ask balise 1 [set label "no" ] ; move-to patch-at-heading-and-distance 0 1 ]
@@ -177,13 +177,13 @@ to runOnce5
   let l turtles-here
   ifelse count l > 1
   [
-    show "il y en a 2"
+    ; show "il y en a 2"
     let t item 0 [self] of other l
-    show [label] of t
+    ; show [label] of t
     if [label] of t = "no" [rt 90  ask turtle 1 [move-to patch-at-heading-and-distance 315 1]]
     if [label] of t = "ne" [rt 90  ask turtle 2 [move-to patch-at-heading-and-distance 45 1]]
     if [label] of t = "se" [rt 90  ask turtle 3 [move-to patch-at-heading-and-distance 135 1]]
-    if [label] of t = "so" [set pcolor white fd 1 rt 90  ask turtle 4 [move-to patch-at-heading-and-distance 225 1]]
+    if [label] of t = "so" [set pcolor white fd 1 rt 90  ask balise 4 [move-to patch-at-heading-and-distance 225 1]]
   ]
   ; else
   [
@@ -201,9 +201,9 @@ end
 
 to init7
   create-robots 3
-  ask robot 0 [set color red set heading 90 set size 1.1 set grandir 0 set cotes 0]
-  ask robot 1 [set color green set shape "pentagon" set size 0.6 set sens 0 set dir "V"]
-  ask robot 2 [set color green set shape "pentagon" set size 0.6 set sens 1 set dir "H"  move-to patch-at-heading-and-distance 135 1 ]
+  ask robot 0 [set color green set heading 0 set size 1.1 set grandir 0 set cotes 0]
+  ask robot 1 [set color red set shape "pentagon" set size 0.6 set sens 1 set dir "V"    move-to patch-at-heading-and-distance 45 1 ]
+  ask robot 2 [set color violet set shape "pentagon" set size 0.6 set sens 1 set dir "H" ]
 end
 
 
@@ -238,7 +238,7 @@ to move0
 end
 
 to changedir0
-  if patch-here = [patch-here] of turtle 1
+  if patch-here = [patch-here] of turtle 2
   [ ifelse cotes = 3
     [ ;beep
       ; on déclenche l'agrandissement
@@ -253,7 +253,7 @@ to changedir0
     ;set label cotes
   ]
 
-  if patch-here = [patch-here] of turtle 2
+  if patch-here = [patch-here] of turtle 1
   [
     rt 90
     set cotes (cotes + 1) mod 4
@@ -262,11 +262,9 @@ to changedir0
 end
 
 
-; Le robot qui réalise la diagonale descendante de la droite vers la gauche
+; Le robot rouge qui réalise la diagonale descendante de la droite vers la gauche
 ; sens = 0 il descend, sens = 1 il remonte
 to move1
-  if grandir > 0 [set grandir grandir - 1 stop]
-
   ; set plabel "x"
 
   ifelse sens = 0 ; on descend
@@ -295,7 +293,17 @@ to move1
   ]
 end
 
+
 to changedir1
+    if patch-here = [patch-here] of turtle 0
+    [ ifelse sens = 0
+      [set sens 1]
+      [set sens 0]
+    ]
+end
+
+
+to changedir2
     if patch-here = [patch-here] of turtle 0
     [ ifelse sens = 0
       [set sens 1]
@@ -310,9 +318,10 @@ to changedir1
 end
 
 
-; Le robot qui réalise la diagonale descendante de la gauche vers la droite
+; Le robot violet qui réalise la diagonale descendante de la gauche vers la droite
 ; sens = 0 il descend, sens = 1 il remonte
 to move2
+  if grandir > 0 [set grandir grandir - 1 stop]
 
   ;set plabel "x"
 
@@ -340,14 +349,6 @@ to move2
       set dir "H"
     ]
   ]
-end
-
-to changedir2
-    if patch-here = [patch-here] of turtle 0
-    [ ifelse sens = 0
-      [set sens 1]
-      [set sens 0]
-    ]
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
@@ -512,7 +513,7 @@ CHOOSER
 algo
 algo
 "algo2" "algo4" "algo5" "algo7"
-1
+3
 
 TEXTBOX
 58
