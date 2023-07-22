@@ -16,7 +16,7 @@ Le fichier robot-spirale.nlogo contient le code correspondant écrit en [Netlogo
 ![robot-algo5](https://user-images.githubusercontent.com/20242612/236641509-dec4bbdb-ac0d-43be-85cb-12806c698462.gif)
 ![robot-algo6](https://github.com/cristal-smac/robot-spirale/assets/20242612/0d489867-9456-48c3-88cf-379241956c2a)
 
-Dans ces quatre figures, les cases noires ne sont pas encore visitées, les cases blanches sont les cases visitées par le(les) robot(s) et les X rouges sont les marques utilisées par le robot si il en utilise. Seul l'algorithme 4 utilise des marques.
+Dans ces quatre figures, les cases noires ne sont pas encore visitées, les cases blanches sont les cases visitées par le(les) robot(s) et les X rouges sont les marques utilisées par le robot si il en utilise (seul l'algorithme 4 utilise des marques).
 
 - fig1 : algo 2  : L'agent compte ses pas dans chaque direction et incrémente à chaque tour. C'est la technique "classique". Cela nécessite une position angulaire (4 valeurs) et 3 entiers (infinité de valeurs), ce qui ne fonctionne pas à l'infini, contrairement aux trois suivants.
 - fig2 : algo 4  : L'agent pose des marques et tourne autour de ses marques. Il ne compte rien. Cela nécessite une position angulaire (4 valeurs) et savoir tester/placer une marque. Dans cette image, des marques on déjà été posées afin de "troubler" le robot. Lorsqu'il y a des telles marques initiales (en nombre fini), le robot après un début de parcours chaotique finit toujours par emprunter une spirale en ne laissant inexplorées qu'un nombre fini de cases.
