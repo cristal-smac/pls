@@ -52,7 +52,7 @@ to setup
   if algo = "algo2" [init2]
   if algo = "algo4" [random-marks init4]
   if algo = "algo5" [init5]
-  if algo = "algo7" [init7]
+  if algo = "algo6" [init6]
 
   reset-ticks
   set rule ""
@@ -62,10 +62,11 @@ end
 
 
 to go
+  if count patches with [pcolor = white] > 0.8 * count patches [stop] ; stop criteria
   if algo = "algo2" [ask robots [runOnce2]]
   if algo = "algo4" [ask robots [runOnce4]]
   if algo = "algo5" [ask robots [runOnce5]]
-  if algo = "algo7" [ask robots [moveall] ask robots [changeall]] ; needed for simultaneity
+  if algo = "algo6" [ask robots [moveall] ask robots [changeall]] ; needed for simultaneity
    ; export-view (word "img/robot" date-and-time ".png")
   tick
 end
@@ -196,10 +197,10 @@ end
 
 
 ;=======================================
-; ALGO 7
+; ALGO 6
 ; 3 robots, avec 4 attributs d'au maximum 2 bits.
 
-to init7
+to init6
   create-robots 3
   ask robot 0 [set color green set heading 0 set size 1.1 set grandir 0 set cotes 0]
   ask robot 1 [set color red set shape "pentagon" set size 0.6 set sens 1 set dir "V"    move-to patch-at-heading-and-distance 45 1 ]
@@ -512,7 +513,7 @@ CHOOSER
 61
 algo
 algo
-"algo2" "algo4" "algo5" "algo7"
+"algo2" "algo4" "algo5" "algo6"
 3
 
 TEXTBOX
