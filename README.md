@@ -14,7 +14,8 @@ Le fichier robot-spirale.nlogo contient le code correspondant écrit en [Netlogo
 ![robot-algo2](https://user-images.githubusercontent.com/20242612/236641530-d0d7ca14-56e3-4c5f-9920-1534e9f91509.gif)
 ![robot-algo4](https://github.com/cristal-smac/robot-spiral-path/assets/20242612/22d35f9c-ab95-4c3e-b2a8-c19efb6ff7b5)
 ![robot-algo5](https://user-images.githubusercontent.com/20242612/236641509-dec4bbdb-ac0d-43be-85cb-12806c698462.gif)
-![robot-algo6](https://github.com/cristal-smac/robot-spirale/assets/20242612/0d489867-9456-48c3-88cf-379241956c2a)
+![robot-algo6](https://github.com/cristal-smac/robot-spiral-path/assets/20242612/bd1d9d85-f916-4a74-b414-b1e6b60cec58)
+
 
 Dans ces quatre figures, les cases noires ne sont pas encore visitées, les cases blanches sont les cases visitées par le(les) robot(s) et les X rouges sont les marques utilisées par le robot si il en utilise (seul l'algorithme 4 utilise des marques).
 
