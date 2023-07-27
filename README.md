@@ -12,7 +12,7 @@ Le fichier robot-spirale.nlogo contient le code correspondant écrit en [Netlogo
 4. chargez le fichier sauvegardé (robot-spirale.nlogo) 
 
 ![robot-algo2](https://user-images.githubusercontent.com/20242612/236641530-d0d7ca14-56e3-4c5f-9920-1534e9f91509.gif)
-![robot-algo4](https://github.com/cristal-smac/robot-spirale/assets/20242612/b3d72151-f025-4594-a2be-c9ed5665f93c)
+![robot-algo4](https://github.com/cristal-smac/robot-spiral-path/assets/20242612/22d35f9c-ab95-4c3e-b2a8-c19efb6ff7b5)
 ![robot-algo5](https://user-images.githubusercontent.com/20242612/236641509-dec4bbdb-ac0d-43be-85cb-12806c698462.gif)
 ![robot-algo6](https://github.com/cristal-smac/robot-spirale/assets/20242612/0d489867-9456-48c3-88cf-379241956c2a)
 
